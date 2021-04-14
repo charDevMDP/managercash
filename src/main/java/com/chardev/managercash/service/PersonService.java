@@ -45,6 +45,7 @@ public class PersonService {
         personRepository.save(person);
     }
 
+    // eliminar un persona
     public void removePerson(String id){
         personRepository.deleteById(id);
     }
