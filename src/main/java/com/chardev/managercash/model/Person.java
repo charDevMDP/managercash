@@ -41,5 +41,4 @@ public abstract class Person {
     public abstract TypePerson typePerson();
 
 
-
 }
