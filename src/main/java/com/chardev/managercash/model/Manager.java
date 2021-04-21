@@ -26,4 +26,17 @@ public class Manager extends Person{
     public TypePerson typePerson() {
         return TypePerson.MANAGER;
     } 
+
+    public Double countMontoTotalInPesos(){
+
+        double monto = 0;
+        for (Player player : playersList){
+            monto += player.getCurrency().getMonto() * player.getCurrency().getCurrency().getUnidInPesos();
+        }
+        return monto;
+    }
+
+    public Double calcPesoBoveda(){
+        return Math.floor(montoTotal/100);
+    }
 }

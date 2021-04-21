@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -14,7 +15,6 @@ import org.springframework.data.annotation.AccessType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,10 +31,11 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NonNull
+    @NotBlank(message = "El nombre es obligatorio")
     @Column(unique = true)
     private String name;
 
+    @NotBlank(message = "El apellido es obligatorio")
     private String lastname;
 
     @AccessType(AccessType.Type.PROPERTY)

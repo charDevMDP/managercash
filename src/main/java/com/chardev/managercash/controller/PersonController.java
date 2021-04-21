@@ -1,7 +1,6 @@
 package com.chardev.managercash.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.chardev.managercash.model.Person;
 import com.chardev.managercash.service.PersonService;
@@ -31,8 +30,8 @@ public class PersonController {
 
     // * GET/person/{id}
     @GetMapping("/{id}")
-    public Optional<Person> getPersonById(@PathVariable String id) {
-        return personService.getByID(id);
+    public Person getPersonById(@PathVariable Integer id) {
+        return personService.getById(id);
     }
 
     // * POST/person
@@ -43,13 +42,13 @@ public class PersonController {
 
     // * PUT/person/{id}/jugadores/{idJugador}
     @PutMapping("/{id}/playes/{idPlayer}")
-    public void addPlayerToPerson(@PathVariable String id, @PathVariable String idPlayer) {
+    public void addPlayerToPerson(@PathVariable Integer id, @PathVariable Integer idPlayer) {
         personService.addPlayerToPerson(id,idPlayer);
     }
 
     // * DEL /person/{id}
     @DeleteMapping("/{id}")
-    public void removePerson(@PathVariable String id){
+    public void removePerson(@PathVariable Integer id){
         personService.removePerson(id);
     }
 }
