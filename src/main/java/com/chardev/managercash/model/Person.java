@@ -1,10 +1,6 @@
 package com.chardev.managercash.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -16,6 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,7 +22,8 @@ import lombok.NoArgsConstructor;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "typePerson", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Manager.class, name = "MANAGER"),
-        @JsonSubTypes.Type(value = Player.class, name = "PLAYER")
+        @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
+        @JsonSubTypes.Type(value = Friend.class, name = "FRIEND")
 })
 public abstract class Person {
 
@@ -40,6 +40,9 @@ public abstract class Person {
 
     @AccessType(AccessType.Type.PROPERTY)
     public abstract TypePerson typePerson();
+
+    @OneToMany
+    private Set<Birthday> birthdaysList;
 
 
 }

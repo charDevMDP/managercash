@@ -2,10 +2,7 @@ package com.chardev.managercash.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +11,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Manager extends Person{
-    
+
+    @Id
+    private Integer id;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
     private List<Player> playersList;
