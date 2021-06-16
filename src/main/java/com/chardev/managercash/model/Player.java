@@ -9,19 +9,21 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @Entity
+@Builder
 public class Player extends Person {
     
     @PositiveOrZero(message = "Debe tener un peso mayor a cero")
     private Float Peso;
 
     @NotNull(message = "Que? no esta a la altura?")
-    private Float Altura;
+    private Integer Altura;
 
     @PositiveOrZero(message = "es malo pero no tanto, goles de 0 pa arriba")
     private Integer Goles;
