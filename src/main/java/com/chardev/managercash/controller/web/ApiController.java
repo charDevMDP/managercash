@@ -1,7 +1,6 @@
 package com.chardev.managercash.controller.web;
 
-import com.chardev.managercash.model.api.Dolar;
-import com.chardev.managercash.model.api.Euro;
+import com.chardev.managercash.model.api.CurrencyApi;
 import com.chardev.managercash.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +17,17 @@ public class ApiController {
     private ApiService apiService;
 
     @GetMapping("/dolar")
-    public Dolar getDolar() throws IOException, InterruptedException {
-        return apiService.getDolar();
+    public CurrencyApi getDolar() throws IOException, InterruptedException {
+        Float buy = apiService.getDolar();
+        CurrencyApi dolar = CurrencyApi.builder().name("dolar").buy(buy).build();
+        return dolar;
     }
 
     @GetMapping("/euro")
-    public Euro getEuro() throws IOException, InterruptedException {
-        return apiService.getEuro();
+    public CurrencyApi getEuro() throws IOException, InterruptedException {
+        Float buy = apiService.getEuro();
+        CurrencyApi euro = CurrencyApi.builder().name("euro").buy(buy).build();
+        return euro;
     }
 
 

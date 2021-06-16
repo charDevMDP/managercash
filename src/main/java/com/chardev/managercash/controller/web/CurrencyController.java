@@ -1,4 +1,4 @@
-package com.chardev.managercash.controller;
+package com.chardev.managercash.controller.web;
 
 import com.chardev.managercash.service.CurrencyService;
 
@@ -17,15 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/current")
+@RequestMapping("/currency")
 public class CurrencyController {
     
     @Autowired
     CurrencyService currencyService;
 
-
     // * GET/current
-    @GetMapping
+    @GetMapping("/")
     public List<Currency> getAll() {
         return currencyService.getAll();
     }

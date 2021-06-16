@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
@@ -25,7 +24,8 @@ import java.util.Set;
         @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
         @JsonSubTypes.Type(value = Friend.class, name = "FRIEND")
 })
-public abstract class Person {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract  class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public abstract class Person {
     @AccessType(AccessType.Type.PROPERTY)
     public abstract TypePerson typePerson();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Birthday> birthdaysList;
 
 

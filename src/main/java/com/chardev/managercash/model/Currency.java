@@ -1,11 +1,9 @@
 package com.chardev.managercash.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +14,14 @@ import lombok.NoArgsConstructor;
 public class Currency {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     
-    private TypeCurrency currency;
+    private TypeCurrency typeCurrency;
     
-    @Positive
+    @PositiveOrZero(message = "mandale mas de 0")
     @NotNull
-    private Integer monto;
-    
-    @OneToOne(mappedBy = "currency")
-    private Player player;
+    private Double monto;
+
 
 }

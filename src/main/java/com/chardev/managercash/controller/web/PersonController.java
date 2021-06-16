@@ -1,6 +1,7 @@
-package com.chardev.managercash.controller;
+package com.chardev.managercash.controller.web;
 
 import java.util.List;
+import java.util.TooManyListenersException;
 
 import com.chardev.managercash.model.Person;
 import com.chardev.managercash.service.PersonService;
@@ -22,22 +23,23 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-    // * GET/person
-    @GetMapping
-    public List<Person> getAll() {
-        return personService.getAll();
-    }
-
     // * GET/person/{id}
     @GetMapping("/{id}")
-    public Person getPersonById(@PathVariable Integer id) {
-        return personService.getById(id);
-    }
+    public Person getPersonById(@PathVariable Integer id) { return personService.getById(id); }
+
+    @GetMapping
+    public List<Person> getAll() { return personService.getAll(); }
 
     // * POST/person
     @PostMapping
     public void addPersona(@RequestBody Person person) {
         personService.add(person);
+    }
+
+    // * DEL /person/{id}
+    @DeleteMapping("/{id}")
+    public void removePerson(@PathVariable Integer id){
+        personService.removePerson(id);
     }
 
     // * PUT/person/{id}/jugadores/{idJugador}
@@ -46,9 +48,9 @@ public class PersonController {
         personService.addPlayerToPerson(id,idPlayer);
     }
 
-    // * DEL /person/{id}
-    @DeleteMapping("/{id}")
-    public void removePerson(@PathVariable Integer id){
-        personService.removePerson(id);
+    @PutMapping("/{id}/birthday/{idBirthday}")
+    public void addFriendToGuests(@PathVariable Integer idPerson, @PathVariable Integer idBirthday) throws TooManyListenersException {
+        personService.addFriendToGuests(idPerson,idBirthday);
     }
+
 }

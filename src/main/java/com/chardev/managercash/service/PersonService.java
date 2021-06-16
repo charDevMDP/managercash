@@ -2,7 +2,9 @@ package com.chardev.managercash.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TooManyListenersException;
 
+import com.chardev.managercash.controller.web.BirthdayController;
 import com.chardev.managercash.model.*;
 import com.chardev.managercash.repository.PersonRepository;
 
@@ -58,36 +60,43 @@ public class PersonService {
     }
 
 
-    // agregar invitado a la lista de invitados
+    /* agregar invitado a la lista de invitados
     public void addPersonToInvitados(Integer id, Integer idPerson) {
 
-        // traigo al cumpleaniero
-        Person person = getById(id);
+        Person person = getById(id); // traigo al cumpleaniero
 
-        // verifico si el cumpleanero es Guillermo xD
-        if(person.getName() == "Guillermo"){
+        if(person.getName() == "Guillermo"){ // verifico si el cumpleanero es Guillermo xD
 
-            // traigo al amigo a invitar
-            Person friend = getById(idPerson);
+            Person friend = getById(idPerson); // traigo al amigo a invitar
 
-            // trago el cumple del cumpleaniero
-            Birthday cumple = (Birthday) person.getBirthdaysList();
+            Birthday cumple = (Birthday) person.getBirthdaysList();  // trago el cumple del cumpleaniero
 
-            // traigo los invitados del cumple
-            Set<Person> invitados = cumple.getInvitados();
+            List<Person> invitados = cumple.getInvitados();  // traigo los invitados del cumple
 
-            // guardo la cant de invitados
-            Integer cantInvitados = invitados.size();
+            Integer cantInvitados = invitados.size();  // guardo la cant de invitados
 
-            // veo que sean menos de 11
-            if(cantInvitados <= 10){
-
-                // agrego amigo a los invitados
-                invitados.add((Friend) friend);
+            if(cantInvitados <= 10){  // veo que sean menos de 11
+                invitados.add((Friend) friend);  // agrego amigo a los invitados
             }
 
-            // guardo los cambios de la persona
-            personRepository.save(person);
+            personRepository.save(person);  // guardo los cambios de la persona
+        }
+    }
+
+     */
+
+    public void addFriendToGuests(Integer idPerson, Integer idBirthday) throws TooManyListenersException {
+        Person person = getById(idPerson);
+        BirthdayController birthdayController= new BirthdayController();
+        Birthday birthday = birthdayController.getById(idBirthday);
+
+        if(person instanceof Friend){
+            if(birthday.getInvitados().stream().count()<10){
+                personRepository.save(person);
+            }else{
+                throw new TooManyListenersException("Lo siento.. ");
+            }
+            throw new IllegalArgumentException("No es un amigo che");
         }
     }
 

@@ -1,9 +1,9 @@
 package com.chardev.managercash.model;
 
 public enum TypePerson {
-    PLAYER("Player"),
-    MANAGER("Manager"),
-    FRIEND("Friend");
+    PLAYER("player"),
+    MANAGER("manager"),
+    FRIEND("friend");
 
 
     private String descripcion;

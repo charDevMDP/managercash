@@ -1,13 +1,13 @@
 package com.chardev.managercash.model;
 
 public enum TypeCurrency {
-    DOLARES("dolares", 99),
-    EUROS("euros", 115);
+    DOLAR("dolares", 99.00),
+    EURO("euros", 115.00);
 
     private String description;
-    private Integer unidInPesos;
+    private Double unidInPesos;
 
-    TypeCurrency (String descripcion, Integer unidadEnPesos){
+    TypeCurrency (String descripcion, Double unidadEnPesos){
         this.description = descripcion;
         this.unidInPesos = unidadEnPesos;
     }
@@ -24,7 +24,7 @@ public enum TypeCurrency {
         return description;
     }
 
-    public Integer getUnidInPesos(){
+    public Double getUnidInPesos(){
         return unidInPesos;
     }
 }
